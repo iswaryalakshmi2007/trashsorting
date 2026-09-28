@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRF Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">♻️</div>
+            <div>
+                <strong>MRF System</strong>
+                <small>Management Portal</small>
+            </div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <button class="nav-item active" data-page="dashboard">
+            <span>🏠</span> Dashboard
+        </button>
+
+        <button class="nav-item" data-page="sorters">
+            <span>⚙️</span> Optical Sorters
+        </button>
+
+        <button class="nav-item" data-page="inventory">
+            <span>📦</span> Inventory
+        </button>
+
+        <button class="nav-item" data-page="production">
+            <span>♻️</span> Production
+        </button>
+
+        <div class="menu-title">SALES</div>
+
+        <button class="nav-item" data-page="sales">
+            <span>🛒</span> Sales Orders
+        </button>
+
+        <button class="nav-item" data-page="invoices">
+            <span>🧾</span> Customer Invoices
+        </button>
+
+        <button class="nav-item" data-page="payments">
+            <span>💳</span> Customer Payments
+        </button>
+
+        <div class="menu-title">PURCHASES</div>
+
+        <button class="nav-item" data-page="purchases">
+            <span>🏭</span> Purchase Orders
+        </button>
+
+        <button class="nav-item" data-page="bills">
+            <span>💰</span> Vendor Bills
+        </button>
+
+        <div class="menu-title">REPORTS</div>
+
+        <button class="nav-item" data-page="reports">
+            <span>📊</span> Reports
+        </button>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div>
+                <h1 id="pageTitle">MRF Dashboard</h1>
+                <p>
+                    Automated Urban Pneumatic Trash Sorting &
+                    Material Recovery Facility
+                </p>
+            </div>
+
+            <div class="header-right">
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    System Online
+                </div>
+
+                <div class="profile">
+                    <div class="profile-icon">A</div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <small>MRF Operations</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section class="page active-page" id="dashboardPage">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h2>Dashboard Overview</h2>
+                        <p>Monitor your Material Recovery Facility</p>
+                    </div>
+
+                    <button class="primary-btn" onclick="loadDashboard()">
+                        🔄 Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="cards">
+
+                    <div class="stat-card inventory-card">
+                        <div class="stat-icon">📦</div>
+
+                        <div>
+                            <span>Total Inventory</span>
+                            <h2 id="inventoryValue">--</h2>
+                            <small>Available materials</small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card revenue-card">
+                        <div class="stat-icon">💰</div>
+
+                        <div>
+                            <span>Total Revenue</span>
+                            <h2 id="revenueValue">--</h2>
+                            <small>Material sales</small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card expense-card">
+                        <div class="stat-icon">💸</div>
+
+                        <div>
+                            <span>Total Expenses</span>
+                            <h2 id="expenseValue">--</h2>
+                            <small>Operating expenses</small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card profit-card">
+                        <div class="stat-icon">📈</div>
+
+                        <div>
+                            <span>Net Profit</span>
+                            <h2 id="profitValue">--</h2>
+                            <small>Current profit</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Inventory Overview</h3>
+                                <p>Current recyclable material stock</p>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+
+                            <table>
+
+                                <thead>
+                                <tr>
+                                    <th>Material</th>
+                                    <th>Quantity</th>
+                                    <th>Unit</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="dashboardInventoryBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel quick-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Quick Actions</h3>
+                                <p>Frequently used operations</p>
+                            </div>
+                        </div>
+
+                        <button class="quick-btn" data-page="production">
+                            <span>♻️</span> Add Production
+                        </button>
+
+                        <button class="quick-btn" data-page="sales">
+                            <span>🛒</span> Create Sales Order
+                        </button>
+
+                        <button class="quick-btn" data-page="invoices">
+                            <span>🧾</span> Create Invoice
+                        </button>
+
+                        <button class="quick-btn" data-page="payments">
+                            <span>💳</span> Record Payment
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SORTERS ================= -->
+
+            <section class="page" id="sortersPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Optical Sorters</h2>
+                        <p>Manage automated sorting machines</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Add Optical Sorter</h3>
+
+                    <form id="sorterForm">
+
+                        <div class="form-group">
+                            <label>Sorter ID</label>
+                            <input type="number" id="sorterId"
+                                   min="1"
+                                   placeholder="Enter sorter id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Sorter Name</label>
+                                <input type="text" id="sorterName"
+                                       placeholder="Enter sorter name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="sorterVendor"
+                                       placeholder="Enter vendor name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorting Type</label>
+
+                                <select id="sortingType" required>
+                                    <option value="">Select Type</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                    <option>Mixed Materials</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+
+                                <select id="sorterStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>ACTIVE</option>
+                                    <option>MAINTENANCE</option>
+                                    <option>INACTIVE</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Add Sorter
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Optical Sorter</h3>
+
+                    <form id="sorterUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Sorter ID</label>
+                                <input type="number" id="updateSorterId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorter Name</label>
+                                <input type="text" id="updateSorterName"
+                                       placeholder="Enter sorter name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="updateSorterVendor"
+                                       placeholder="Enter vendor name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorting Type</label>
+                                <select id="updateSortingType" required>
+                                    <option value="">Select Type</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                    <option>Mixed Materials</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="updateSorterStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>ACTIVE</option>
+                                    <option>MAINTENANCE</option>
+                                    <option>INACTIVE</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Sorter
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Optical Sorter</h3>
+
+                    <form id="sorterDeleteForm">
+
+                        <div class="form-group">
+                            <label>Sorter ID</label>
+                            <input type="number" id="deleteSorterId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Sorter
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LIST -->
+
+                <div class="panel">
+
+                    <h3>Sorter List</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Sorter</th>
+                                <th>Vendor</th>
+                                <th>Sorting Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="sorterTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= INVENTORY ================= -->
+
+            <section class="page" id="inventoryPage">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h2>Inventory Management</h2>
+                        <p>Manage recyclable material inventory</p>
+                    </div>
+
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Add Inventory</h3>
+
+                    <form id="inventoryForm">
+
+                        <div class="form-group">
+                            <label>Inventory ID</label>
+                            <input type="number" id="inventoryId"
+                                   min="1"
+                                   placeholder="Enter inventory id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+
+                                <select id="inventoryMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+
+                                <input type="number"
+                                       id="inventoryQuantity"
+                                       placeholder="Enter quantity"
+                                       min="0"
+                                       required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="inventoryUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price (₹)</label>
+
+                                <input type="number"
+                                       id="inventoryPrice"
+                                       placeholder="Enter unit price"
+                                       min="0"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Add Inventory
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Inventory</h3>
+
+                    <form id="inventoryUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Inventory ID</label>
+                                <input type="number" id="updateInventoryId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+
+                                <select id="updateInventoryMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="updateInventoryQuantity"
+                                       placeholder="Enter quantity" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="updateInventoryUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="updateInventoryPrice"
+                                       placeholder="Enter price" required>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Inventory
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Inventory</h3>
+
+                    <form id="inventoryDeleteForm">
+
+                        <div class="form-group">
+                            <label>Inventory ID</label>
+                            <input type="number" id="deleteInventoryId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Inventory
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LIST -->
+
+                <div class="panel">
+
+                    <h3>Current Inventory</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Material</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Unit Price</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="inventoryBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PRODUCTION ================= -->
+
+            <section class="page" id="productionPage">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h2>Production & Sorting</h2>
+                        <p>Record sorted recyclable materials</p>
+                    </div>
+
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Add Production Record</h3>
+
+                    <form id="productionForm">
+
+                        <div class="form-group">
+                            <label>Production ID</label>
+                            <input type="number" id="productionId"
+                                   min="1"
+                                   placeholder="Enter production id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+
+                                <select id="productionMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorted Weight</label>
+
+                                <input type="number" id="sortedWeight"
+                                       placeholder="Enter weight"
+                                       min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="productionUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorter Name</label>
+
+                                <input type="text" id="productionSorter"
+                                       placeholder="Enter sorter name"
+                                       required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Production Date</label>
+
+                                <input type="date" id="productionDate"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Record Production
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Production</h3>
+
+                    <form id="productionUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Production ID</label>
+                                <input type="number" id="updateProductionId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+
+                                <select id="updateProductionMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorted Weight</label>
+                                <input type="number" id="updateSortedWeight"
+                                       placeholder="Enter weight" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="updateProductionUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sorter Name</label>
+                                <input type="text" id="updateProductionSorter"
+                                       placeholder="Enter sorter name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Production Date</label>
+                                <input type="date" id="updateProductionDate"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Production
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Production</h3>
+
+                    <form id="productionDeleteForm">
+
+                        <div class="form-group">
+                            <label>Production ID</label>
+                            <input type="number" id="deleteProductionId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Production
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LIST -->
+
+                <div class="panel">
+
+                    <h3>Production Records</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Material</th>
+                                <th>Weight</th>
+                                <th>Unit</th>
+                                <th>Sorter</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="productionBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SALES ================= -->
+
+            <section class="page" id="salesPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Sales Orders</h2>
+                        <p>Create and manage recyclable material sales</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Create Sales Order</h3>
+
+                    <form id="salesForm">
+
+                        <div class="form-group">
+                            <label>Sales Order ID</label>
+                            <input type="number" id="salesId"
+                                   min="1"
+                                   placeholder="Enter sales order id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="salesBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="salesBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" id="salesProduct"
+                                       placeholder="Enter product name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+
+                                <select id="salesMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="salesQuantity"
+                                       placeholder="Enter quantity" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="salesUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="salesUnitPrice"
+                                       placeholder="Enter unit price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="number" id="salesTotalAmount"
+                                       placeholder="Enter total amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" id="salesDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+
+                                <select id="salesStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>CREATED</option>
+                                    <option>CONFIRMED</option>
+                                    <option>DELIVERED</option>
+                                    <option>CANCELLED</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Create Sales Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Sales Order</h3>
+
+                    <form id="salesUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Sales Order ID</label>
+                                <input type="number" id="updateSalesId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="updateSalesBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="updateSalesBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" id="updateSalesProduct"
+                                       placeholder="Enter product" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+                                <select id="updateSalesMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="updateSalesQuantity"
+                                       placeholder="Enter quantity" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <select id="updateSalesUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="updateSalesUnitPrice"
+                                       placeholder="Enter price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="number" id="updateSalesTotalAmount"
+                                       placeholder="Enter total" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" id="updateSalesDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="updateSalesStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>CREATED</option>
+                                    <option>CONFIRMED</option>
+                                    <option>DELIVERED</option>
+                                    <option>CANCELLED</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Sales Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Sales Order</h3>
+
+                    <form id="salesDeleteForm">
+
+                        <div class="form-group">
+                            <label>Sales Order ID</label>
+                            <input type="number" id="deleteSalesId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Sales Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>Sales Orders</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Broker</th>
+                                <th>Product</th>
+                                <th>Material</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="salesBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= INVOICES ================= -->
+
+            <section class="page" id="invoicesPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Customer Invoices</h2>
+                        <p>Manage invoices generated for customers</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Create Customer Invoice</h3>
+
+                    <form id="invoiceForm">
+
+                        <div class="form-group">
+                            <label>Invoice ID</label>
+                            <input type="number" id="invoiceId"
+                                   min="1"
+                                   placeholder="Enter invoice id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Sales Order ID</label>
+                                <input type="number" id="invoiceSalesOrderId"
+                                       placeholder="Enter sales order ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="invoiceBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="invoiceBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" id="invoiceProduct"
+                                       placeholder="Enter product name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+                                <select id="invoiceMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Delivered Weight</label>
+                                <input type="number" id="invoiceWeight"
+                                       placeholder="Enter weight" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <select id="invoiceUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="invoicePrice"
+                                       placeholder="Enter price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Invoice Amount</label>
+                                <input type="number" id="invoiceAmount"
+                                       placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Invoice Date</label>
+                                <input type="date" id="invoiceDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+                                <select id="invoiceStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>UNPAID</option>
+                                    <option>PAID</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Create Invoice
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Customer Invoice</h3>
+
+                    <form id="invoiceUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Invoice ID</label>
+                                <input type="number" id="updateInvoiceId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sales Order ID</label>
+                                <input type="number" id="updateInvoiceSalesOrderId"
+                                       placeholder="Enter sales order ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="updateInvoiceBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="updateInvoiceBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" id="updateInvoiceProduct"
+                                       placeholder="Enter product" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Material Type</label>
+                                <select id="updateInvoiceMaterial" required>
+                                    <option value="">Select Material</option>
+                                    <option>PET</option>
+                                    <option>Aluminum</option>
+                                    <option>Paper</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Delivered Weight</label>
+                                <input type="number" id="updateInvoiceWeight"
+                                       placeholder="Enter weight" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <select id="updateInvoiceUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="updateInvoicePrice"
+                                       placeholder="Enter price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Invoice Amount</label>
+                                <input type="number" id="updateInvoiceAmount"
+                                       placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Invoice Date</label>
+                                <input type="date" id="updateInvoiceDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+                                <select id="updateInvoiceStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>UNPAID</option>
+                                    <option>PAID</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Invoice
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Customer Invoice</h3>
+
+                    <form id="invoiceDeleteForm">
+
+                        <div class="form-group">
+                            <label>Invoice ID</label>
+                            <input type="number" id="deleteInvoiceId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Invoice
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>Invoice List</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Broker</th>
+                                <th>Product</th>
+                                <th>Weight</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="invoiceBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PAYMENTS ================= -->
+
+            <section class="page" id="paymentsPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Customer Payments</h2>
+                        <p>Record payments received from brokers</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Record Customer Payment</h3>
+
+                    <form id="paymentForm">
+
+                        <div class="form-group">
+                            <label>Payment ID</label>
+                            <input type="number" id="paymentId"
+                                   min="1"
+                                   placeholder="Enter payment id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Customer Invoice ID</label>
+                                <input type="number" id="paymentInvoiceId"
+                                       placeholder="Enter invoice ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="paymentBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="paymentBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Amount</label>
+                                <input type="number" id="paymentAmount"
+                                       placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Date</label>
+                                <input type="date" id="paymentDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Method</label>
+
+                                <select id="paymentMethod" required>
+                                    <option value="">Select Method</option>
+                                    <option>BANK_TRANSFER</option>
+                                    <option>CASH</option>
+                                    <option>UPI</option>
+                                    <option>CHEQUE</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+
+                                <select id="paymentStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>COMPLETED</option>
+                                    <option>PENDING</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Reference Number</label>
+                                <input type="text" id="paymentReference"
+                                       placeholder="Enter reference number" required>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Record Payment
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Customer Payment</h3>
+
+                    <form id="paymentUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Payment ID</label>
+                                <input type="number" id="updatePaymentId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Customer Invoice ID</label>
+                                <input type="number" id="updatePaymentInvoiceId"
+                                       placeholder="Enter invoice ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker ID</label>
+                                <input type="number" id="updatePaymentBrokerId"
+                                       placeholder="Enter broker ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Broker Name</label>
+                                <input type="text" id="updatePaymentBrokerName"
+                                       placeholder="Enter broker name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Amount</label>
+                                <input type="number" id="updatePaymentAmount"
+                                       placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Date</label>
+                                <input type="date" id="updatePaymentDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Method</label>
+                                <select id="updatePaymentMethod" required>
+                                    <option value="">Select Method</option>
+                                    <option>BANK_TRANSFER</option>
+                                    <option>CASH</option>
+                                    <option>UPI</option>
+                                    <option>CHEQUE</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+                                <select id="updatePaymentStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>COMPLETED</option>
+                                    <option>PENDING</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Reference Number</label>
+                                <input type="text" id="updatePaymentReference"
+                                       placeholder="Enter reference" required>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Payment
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Customer Payment</h3>
+
+                    <form id="paymentDeleteForm">
+
+                        <div class="form-group">
+                            <label>Payment ID</label>
+                            <input type="number" id="deletePaymentId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Payment
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>Payment History</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Invoice</th>
+                                <th>Broker</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="paymentBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PURCHASE ORDERS ================= -->
+
+            <section class="page" id="purchasesPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Purchase Orders</h2>
+                        <p>Manage vendor purchase orders</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Create Purchase Order</h3>
+
+                    <form id="purchaseForm">
+
+                        <div class="form-group">
+                            <label>Purchase Order ID</label>
+                            <input type="number" id="purchaseId"
+                                   min="1"
+                                   placeholder="Enter purchase order id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="purchaseVendor"
+                                       placeholder="Enter vendor name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product / Service</label>
+                                <input type="text" id="purchaseProduct"
+                                       placeholder="Enter product or service" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Type</label>
+
+                                <select id="purchaseType" required>
+                                    <option value="">Select Type</option>
+                                    <option>Service</option>
+                                    <option>Goods</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="purchaseQuantity"
+                                       placeholder="Enter quantity" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+
+                                <select id="purchaseUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                    <option>UNIT</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="purchasePrice"
+                                       placeholder="Enter unit price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="number" id="purchaseTotalAmount"
+                                       placeholder="Enter total amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" id="purchaseDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+
+                                <select id="purchaseStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>CREATED</option>
+                                    <option>APPROVED</option>
+                                    <option>COMPLETED</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Create Purchase Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Purchase Order</h3>
+
+                    <form id="purchaseUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Purchase Order ID</label>
+                                <input type="number" id="updatePurchaseId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="updatePurchaseVendor"
+                                       placeholder="Enter vendor" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product / Service</label>
+                                <input type="text" id="updatePurchaseProduct"
+                                       placeholder="Enter product" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Type</label>
+                                <select id="updatePurchaseType" required>
+                                    <option value="">Select Type</option>
+                                    <option>Service</option>
+                                    <option>Goods</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="updatePurchaseQuantity"
+                                       placeholder="Enter quantity" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <select id="updatePurchaseUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option>KG</option>
+                                    <option>TON</option>
+                                    <option>UNIT</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input type="number" id="updatePurchasePrice"
+                                       placeholder="Enter price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="number" id="updatePurchaseTotalAmount"
+                                       placeholder="Enter total" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" id="updatePurchaseDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="updatePurchaseStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>CREATED</option>
+                                    <option>APPROVED</option>
+                                    <option>COMPLETED</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Purchase Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Purchase Order</h3>
+
+                    <form id="purchaseDeleteForm">
+
+                        <div class="form-group">
+                            <label>Purchase Order ID</label>
+                            <input type="number" id="deletePurchaseId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Purchase Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>Purchase Order List</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Vendor</th>
+                                <th>Product</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="purchaseBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= VENDOR BILLS ================= -->
+
+            <section class="page" id="billsPage">
+
+                <div class="page-heading">
+                    <div>
+                        <h2>Vendor Bills</h2>
+                        <p>Manage vendor invoices and payments</p>
+                    </div>
+                </div>
+
+
+                <!-- ADD -->
+
+                <div class="form-panel">
+
+                    <h3>Create Vendor Bill</h3>
+
+                    <form id="billForm">
+
+                        <div class="form-group">
+                            <label>Bill ID</label>
+                            <input type="number" id="billId"
+                                   min="1"
+                                   placeholder="Enter bill id" required>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Purchase Order ID</label>
+                                <input type="number" id="billPOId"
+                                       placeholder="Enter PO ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="billVendor"
+                                       placeholder="Enter vendor name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product / Service</label>
+                                <input type="text" id="billProduct"
+                                       placeholder="Enter product or service" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bill Amount</label>
+                                <input type="number" id="billAmount"
+                                       placeholder="Enter bill amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bill Date</label>
+                                <input type="date" id="billDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+
+                                <select id="billStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>UNPAID</option>
+                                    <option>PAID</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            + Create Vendor Bill
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <div class="form-panel">
+
+                    <h3>Update Vendor Bill</h3>
+
+                    <form id="billUpdateForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Bill ID</label>
+                                <input type="number" id="updateBillId"
+                                       placeholder="Enter ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Purchase Order ID</label>
+                                <input type="number" id="updateBillPOId"
+                                       placeholder="Enter PO ID" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="updateBillVendor"
+                                       placeholder="Enter vendor" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product / Service</label>
+                                <input type="text" id="updateBillProduct"
+                                       placeholder="Enter product" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bill Amount</label>
+                                <input type="number" id="updateBillAmount"
+                                       placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bill Date</label>
+                                <input type="date" id="updateBillDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payment Status</label>
+
+                                <select id="updateBillStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option>UNPAID</option>
+                                    <option>PAID</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="secondary-btn" type="submit">
+                            ✏️ Update Vendor Bill
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- DELETE -->
+
+                <div class="form-panel">
+
+                    <h3>Delete Vendor Bill</h3>
+
+                    <form id="billDeleteForm">
+
+                        <div class="form-group">
+                            <label>Bill ID</label>
+                            <input type="number" id="deleteBillId"
+                                   placeholder="Enter ID to delete" required>
+                        </div>
+
+                        <button class="danger-btn" type="submit">
+                            🗑️ Delete Vendor Bill
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>Vendor Bill List</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>PO ID</th>
+                                <th>Vendor</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="billBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= REPORTS ================= -->
+
+            <section class="page" id="reportsPage">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h2>Financial Reports</h2>
+                        <p>Monitor MRF financial performance</p>
+                    </div>
+
+                </div>
+
+
+                <div class="report-grid">
+
+                    <div class="report-card">
+
+                        <div class="report-icon">📈</div>
+
+                        <h3>Profit & Loss</h3>
+
+                        <p>View revenue, expenses and net profit.</p>
+
+                        <button class="secondary-btn"
+                                onclick="showReport('profit')">
+                            View Report
+                        </button>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">⚖️</div>
+
+                        <h3>Balance Sheet</h3>
+
+                        <p>View assets, liabilities and equity.</p>
+
+                        <button class="secondary-btn"
+                                onclick="showReport('balance')">
+                            View Report
+                        </button>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">💹</div>
+
+                        <h3>Budget Variance</h3>
+
+                        <p>Compare planned and actual values.</p>
+
+                        <button class="secondary-btn"
+                                onclick="showReport('budget')">
+                            View Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel report-result">
+
+                    <h3>Report Result</h3>
+
+                    <div id="reportOutput">
+
+                        <div class="empty-state">
+                            <span>📊</span>
+                            <p>Select a report above to view details.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+<button class="delete-btn" onclick="deleteVendorBill(1)">
+    🗑️ Delete
+</button>
+```
